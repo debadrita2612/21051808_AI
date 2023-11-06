@@ -46,8 +46,25 @@ void mutate(Square& square) {
 
 
 float fitness(const Square& square, const cv::Mat& targetImage) {
-    // Implement your fitness function here
-    // Compare the generated square with the target image
+    float mse = 0.0;
+    
+    // Iterate over the pixels in the canvas and target image
+    for (int y = 0; y < CANVAS_HEIGHT; y++) {
+        for (int x = 0; x < CANVAS_WIDTH; x++) {
+            cv::Vec3b canvasPixel = canvas.at<cv::Vec3b>(y, x);
+            cv::Vec3b targetPixel = targetImage.at<cv::Vec3b>(y, x);
+            
+            // Calculate squared differences for each color channel (R, G, B)
+            float squaredDiffR = static_cast<float>(canvasPixel[2]) - static_cast<float>(targetPixel[2]);
+            float squaredDiffG = static_cast(float)(canvasPixel[1]) - static_cast<float>(targetPixel[1]);
+            float squaredDiffB = static_cast<float>(canvasPixel[0]) - static_cast<float>(targetPixel[0]);
+            
+            mse += squaredDiffR * squaredDiffR + squaredDiffG * squaredDiffG + squaredDiffB * squaredDiffB;
+        }
+    }
+    
+    // Normalize MSE by the number of pixels
+    mse /= (CANVAS_WIDTH * CANVAS_HEIGHT);
 }
 
 int main() {
