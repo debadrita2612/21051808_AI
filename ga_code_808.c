@@ -67,18 +67,18 @@ void mutate(Square& square) {
 }
 
 // Function to evaluate the fitness of a square
-float fitness(const Square& square, const cv::Mat& targetImage) {
+float fitness(const Square& square, const cv::Mat& testtImage) {
 cv::Mat generatedImage(CANVAS_HEIGHT, CANVAS_WIDTH, CV_8UC3, cv::Scalar(255, 255, 255));
     
     // Draw the square on the generated image
     drawSquare(generatedImage, square);
     
     // Calculate the SSIM between the generated image and the target image
-    cv::Mat targetImageGray, generatedImageGray;
-    cv::cvtColor(targetImage, targetImageGray, cv::COLOR_BGR2GRAY);
+    cv::Mat testImageGray, generatedImageGray;
+    cv::cvtColor(testtImage, testImageGray, cv::COLOR_BGR2GRAY);
     cv::cvtColor(generatedImage, generatedImageGray, cv::COLOR_BGR2GRAY);
     
-    double ssim = cv::quality::QualityPSNR::compute(targetImageGray, generatedImageGray);
+    double ssim = cv::quality::QualityPSNR::compute(testImageGray, generatedImageGray);
     
     // Normalize the SSIM score to be within the range [0, 1]
     float normalizedSsim = static_cast<float>((ssim + 1.0) / 2.0);
@@ -122,7 +122,7 @@ int main() {
     srand(time(NULL));
     
     // Load the target image using OpenCV
-    cv::Mat targetImage = cv::imread("test_image.jpg");
+    cv::Mat testtImage = cv::imread("testimage.jpg");
     cv::Mat canvas(CANVAS_HEIGHT, CANVAS_WIDTH, CV_8UC3, cv::Scalar(255, 255, 255));
     
     Square population[NUM_SQUARES];
@@ -130,7 +130,7 @@ int main() {
     for (int generation = 0; generation < NUM_GENERATIONS; generation++) {
         // Evaluate fitness for each square in the population
         for (int i = 0; i < NUM_SQUARES; i++) {
-            population[i].fitness = fitness(population[i], targetImage);
+            population[i].fitness = fitness(population[i], testImage);
         }
         
         // Select the top-performing squares as parents for crossover
