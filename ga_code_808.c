@@ -44,7 +44,7 @@ void mutate(Square& square) {
     }
 }
 
-// Function to evaluate the fitness of a square
+
 float fitness(const Square& square, const cv::Mat& targetImage) {
     // Implement your fitness function here
     // Compare the generated square with the target image
