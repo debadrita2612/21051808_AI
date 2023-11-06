@@ -17,6 +17,17 @@ Mutation Function ('mutate')
 The mutation function introduces  arbitrary changes to an  existent's attributes. In this simplified  law, we apply mutations to the following attributes of a square  
 Position( 'x and y') We aimlessly acclimate the position of the square by a small  quantum to introduce variation.   
 Color('color') We  induce a  arbitrary color to change the appearance of the forecourt. 
-Opacity('opacity') We change the  nebulosity of the square to vary its  translucency. Mutations  do grounded on the MUTATION_RATE. still, a mutation is applied to a specific  trait, If a  arbitrary value is  lower than the mutation rate. 
+Opacity('opacity') We change the  nebulosity of the square to vary its  translucency. Mutations  do grounded on the MUTATION_RATE. still, a mutation is applied to a specific  trait, If a  arbitrary value is  lower than the mutation rate.
+
+ Selection Function('selection')
+ 
+The selection function is responsible for  opting   individualities from the current population to be parents for the coming generation. In this simplified  law, we use a  introductory  event selection strategy. Then is how it works 
+For each  existent in the population, we  produce a  event group by aimlessly  opting  a fixed number of  individualities( in this case, tournamentSize). The  event is like a competition where these  individualities will  contend to be  named as parents.   
+Among the  individualities in the  event, we find the bone with the loftiest fitness. This  existent is considered the" winner" of the  event. 
+The" winners" of each  event come parents for the coming generation, and they're stored in 'tempPopulation'.  
+Eventually, we replace the population with the named parents from 'tempPopulation'. 
+
+
+
 
 
