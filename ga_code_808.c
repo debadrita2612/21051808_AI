@@ -122,7 +122,7 @@ int main() {
     srand(time(NULL));
     
     // Load the target image using OpenCV
-    cv::Mat testtImage = cv::imread("testimage.jpg");
+    cv::Mat testtImage = cv::imread("testimage.png");
     cv::Mat canvas(CANVAS_HEIGHT, CANVAS_WIDTH, CV_8UC3, cv::Scalar(255, 255, 255));
     
     Square population[NUM_SQUARES];
